@@ -70,7 +70,7 @@ jobs:
         file: ./app/Dockerfile
         builder: ${{ steps.buildx.outputs.name }}
         push: true
-        tags: ${{ secrets.DOCKER_USERNAME }}/hello-gitops:${{ github.sha }}, ${{ secrets.DOCKER_USERNAME }}/hello-gitops:latest
+        tags:  ${{ secrets.DOCKER_USERNAME }}/hello-gitops:latest
         platforms: linux/amd64,linux/arm64
         cache-from: type=local,src=/tmp/.buildx-cache
         cache-to: type=local,dest=/tmp/.buildx-cache
@@ -96,7 +96,7 @@ jobs:
       run: |
        cd k8s
        kustomize edit set namespace hello-gitops
-       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:$GITHUB_SHA
+       kustomize edit set image hello-gitops=$DOCKER_USERNAME/hello-gitops:latest
        cat kustomization.yaml
         
     - name: Commit files
