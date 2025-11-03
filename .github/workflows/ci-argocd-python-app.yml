@@ -105,6 +105,10 @@ jobs:
         git config --local user.name "GitHub Action"
         git commit -am "Bump docker tag"
 
+    - name: Pull latest changes
+      run: |
+        git pull --rebase origin main
+
     - name: Push changes
       uses: ad-m/github-push-action@master
       with:
